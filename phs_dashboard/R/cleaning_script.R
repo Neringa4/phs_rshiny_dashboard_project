@@ -4,7 +4,7 @@
 
 # renaming variables
 # inputting coords for S319H (Little France, Edinburgh Children hospital) 
-locations <- read_csv(here("../raw_data/nhs_medicalcentres.csv")) %>%
+locations <- read_csv(here("raw_data/nhs_medicalcentres.csv")) %>%
   clean_names() %>%
   rename(treatment_location = location, health_board = hb) %>% 
   mutate(x_coordinate = coalesce(x_coordinate, 328936),
@@ -24,14 +24,14 @@ locations <- locations %>%
 
 # removing unneeded cols
 # renaming variables in health board for join
-health_boards <- read_csv(here("../raw_data/nhs_healthboards.csv")) %>%
+health_boards <- read_csv(here("raw_data/nhs_healthboards.csv")) %>%
   clean_names() %>%
   select(2:3) %>% 
   rename(health_board = hb)
 
 # removing unneeded cols
 admissions_ae <- 
-  read_csv(here("../raw_data/monthly_a&e_activity_and_waiting_times.csv")) %>%
+  read_csv(here("raw_data/monthly_a&e_activity_and_waiting_times.csv")) %>%
   clean_names() 
 
 # JOINING DATA
@@ -106,7 +106,7 @@ rm(hb_name_label)
 # clean data
 
 capacity_general <- 
-  read_csv(here("../raw_data/bed_by_board_of_treatment_and_speciality.csv")) %>% 
+  read_csv(here("raw_data/bed_by_board_of_treatment_and_speciality.csv")) %>% 
   clean_names() %>%
   filter(is.na(location_qf),
          specialty_name_qf == "d")
@@ -129,7 +129,7 @@ percentage_label <- capacity_general %>%
 #Deprivation data
 
 #making a set which looks at quarter and simd and groups them
-simd_quarter <- read_csv(here("../raw_data/treatment_and_deprevation.csv")) %>%
+simd_quarter <- read_csv(here("raw_data/treatment_and_deprevation.csv")) %>%
   clean_names() %>% 
   filter(!is.na(simd))
 
@@ -143,7 +143,7 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9",
 #count the number of missing value
 
 demographics <- 
-  read_csv(here("../raw_data/treatment_age_and_sex.csv"))%>% 
+  read_csv(here("raw_data/treatment_age_and_sex.csv"))%>% 
   clean_names()
 #filtering the data by age
 demographics_sex <- demographics %>% 
